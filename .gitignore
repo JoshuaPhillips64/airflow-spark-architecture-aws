@@ -1,0 +1,5 @@
+*.json
+*.tfplan
+*.tfvars
+.terraform/
+*.txt
