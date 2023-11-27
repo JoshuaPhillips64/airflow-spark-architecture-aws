@@ -4,7 +4,7 @@ FROM apache/airflow:2.5.2-python3.9
 
 ENV AIRFLOW_HOME=/opt/airflow
 
-USER root
+USER $AIRFLOW_UID
 # Update and upgrade the system packages, and install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git curl unzip && \
