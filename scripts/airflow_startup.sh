@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Clone the GitHub repository
+cd ~
+git clone https://github.com/JoshuaPhillips64/airflow-spark-architecture-aws.git
+
 echo "Changing permissions for dbt folder..."
 cd ~/airflow-spark-streaming-aws/ && sudo chmod -R 777 dbt
 

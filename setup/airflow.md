@@ -10,39 +10,10 @@ We will setup airflow on docker in a dedicated compute instance. dbt is setup in
   ssh streamify-airflow
   ```
 
-On Local machine
+On Local machine - .pem file should be saved to folder where you are running local terminal
   ```bash
-  ssh -i "streaming-architecture-key-pair.pem" ec2-user@ec2-34-216-68-35.us-west-2.compute.amazonaws.com
+  ssh -i "streaming-architecture-key-pair.pem" ec2-user@<OUTPUT FROM TERRAFORM>
   ```
-
-- Clone git repo
-
-  ```bash
-  git clone https://github.com/JoshuaPhillips64/airflow-spark-architecture-aws.git && \
-  cd airflow-spark-streaming-aws
-  ```
-- Install anaconda, docker & docker-compose.
-
-  ```bash
-  bash ~/airflow-spark-streaming-aws/scripts/vm_setup.sh && \
-  exec newgrp docker
-  ```
-- Move the service account json file from local to the VM machine in `~/.google/credentials/` directory.  Make sure it is named as `google_credentials.json`  else the dags will fail!
-
-  - You can use [sftp](https://youtu.be/ae-CV2KfoN0?t=2442) to transfer the file.
-
-- Set the evironment variables (same as Terraform values)-
-
-  - GCP Project ID
-
-  - Cloud Storage Bucket Name
-
-    ```bash
-    export GCP_PROJECT_ID=project-id
-    export GCP_GCS_BUCKET=bucket-name
-    ```
-
-    **Note**: You will have to setup these env vars every time you create a new shell session.
 
 - Start Airflow. (This shall take a few good minutes, grab a coffee!)
 
