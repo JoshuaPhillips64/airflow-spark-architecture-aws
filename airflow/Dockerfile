@@ -1,39 +1,24 @@
 # First-time build can take upto 10 mins.
 
-# Use the official Apache Airflow image as a base
 FROM apache/airflow:2.2.3
 
-# Set the AIRFLOW_HOME environment variable
 ENV AIRFLOW_HOME=/opt/airflow
 
-# Run as root to install packages and manage system settings
 USER root
-
 # Update and upgrade the system packages, and install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git curl && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* \
 
-# Install Poetry
-RUN set -x && curl -sSL https://install.python-poetry.org | python3 -
+RUN pip install --upgrade pip
+# git gcc g++ -qqq
 
-# Copy only your pyproject.toml file into the image
-# This file should define your Python dependencies
-COPY pyproject.toml $AIRFLOW_HOME/
-
-# Change working directory
-WORKDIR $AIRFLOW_HOME
-
-# Disable virtual environment creation by Poetry
-# as Docker container itself provides isolation
-RUN poetry config virtualenvs.create false
-
-# Install dependencies using Poetry
-# This will also create the poetry.lock file
-RUN set -x && poetry install --no-dev
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Ref: https://airflow.apache.org/docs/docker-stack/recipes.html
+
 SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
 
 # Install AWS CLI for AWS operations within Airflow
@@ -42,5 +27,6 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && ./aws/install \
     && aws --version
 
-# Switch back to the Airflow user
+WORKDIR $AIRFLOW_HOME
+
 USER $AIRFLOW_UID
