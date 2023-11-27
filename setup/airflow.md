@@ -4,22 +4,27 @@
 
 We will setup airflow on docker in a dedicated compute instance. dbt is setup inside airflow.
 
-- Establish SSH connection or connect through AWS console
+- Establish SSH connection or connect through AWS console 
 
   ```bash
   ssh streamify-airflow
   ```
 
+On Local machine
+  ```bash
+  ssh -i "streaming-architecture-key-pair.pem" ec2-user@ec2-34-216-68-35.us-west-2.compute.amazonaws.com
+  ```
+
 - Clone git repo
 
   ```bash
-  git clone https://github.com/JoshPhillips64/.git && \
-  cd streamify
+  git clone https://github.com/JoshuaPhillips64/airflow-spark-architecture-aws.git && \
+  cd airflow-spark-streaming-aws
   ```
 - Install anaconda, docker & docker-compose.
 
   ```bash
-  bash ~/streamify/scripts/vm_setup.sh && \
+  bash ~/airflow-spark-streaming-aws/scripts/vm_setup.sh && \
   exec newgrp docker
   ```
 - Move the service account json file from local to the VM machine in `~/.google/credentials/` directory.  Make sure it is named as `google_credentials.json`  else the dags will fail!
@@ -42,7 +47,7 @@ We will setup airflow on docker in a dedicated compute instance. dbt is setup in
 - Start Airflow. (This shall take a few good minutes, grab a coffee!)
 
   ```bash
-  bash ~/streamify/scripts/airflow_startup.sh && cd ~/streamify/airflow
+  bash ~/airflow-spark-streaming-aws/scripts/airflow_startup.sh && cd ~/airflow-spark-streaming-aws/airflow
   ```
 
 - Airflow should be available on port `8080` a couple of minutes after the above setup is complete. Login with default username & password as **airflow**.

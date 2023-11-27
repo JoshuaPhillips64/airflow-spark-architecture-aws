@@ -3,6 +3,12 @@
 # Run using the below command
 # bash vm_setup.sh
 
+echo "Updating package lists..."
+sudo apt-get update
+
+echo "Installing Git..."
+sudo apt-get -y install git
+
 echo "Downloading anaconda..."
 wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
 
@@ -49,5 +55,3 @@ eval "$(cat ~/.bashrc | tail -n +10)" # A hack because source .bashrc doesn't wo
 
 echo "docker-compose version..."
 docker-compose --version
-
-mkdir -p ~/.google/credentials

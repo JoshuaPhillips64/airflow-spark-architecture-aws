@@ -131,6 +131,11 @@ resource "aws_instance" "airflow" {
   user_data = file("${path.module}/../scripts/vm_setup.sh")
 }
 
+output "airflow_public_ip" {
+  description = "The public IP address of the Airflow instance."
+  value       = aws_instance.airflow.public_ip
+}
+
 # EC2 Instance for Spark
 resource "aws_instance" "spark" {
   ami           = data.aws_ami.latest_amazon_linux.id
