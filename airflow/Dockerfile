@@ -4,13 +4,14 @@ FROM apache/airflow:2.5.2-python3.9
 
 ENV AIRFLOW_HOME=/opt/airflow
 
-USER $AIRFLOW_UID
+USER root
 # Update and upgrade the system packages, and install system dependencies
-RUN sudo apt-get update && \
-    sudo apt-get install -y --no-install-recommends git curl unzip && \
-    sudo apt-get clean && \
-    sudo rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git curl unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
+USER $AIRFLOW_UID
 RUN pip install --upgrade pip
 # git gcc g++ -qqq
 
