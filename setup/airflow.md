@@ -15,6 +15,18 @@ On Local machine - .pem file should be saved to folder where you are running loc
   ssh -i "streaming-architecture-key-pair.pem" ec2-user@<OUTPUT FROM TERRAFORM>
   ```
 
+Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below
+    
+  ```bash
+  sudo cat /var/log/cloud-init-output.log
+  ```
+
+After it has completed - Clone git repo
+
+  ```bash
+  cd ~ && git clone https://github.com/JoshuaPhillips64/airflow-spark-architecture-aws.git
+  ```
+
 - Start Airflow. (This shall take a few good minutes, grab a coffee!)
 
   ```bash

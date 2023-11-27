@@ -24,11 +24,17 @@ groupadd docker
 usermod -aG docker ec2-user
 
 # Installing Docker Compose
-mkdir -p /root/bin
-wget https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -O /root/bin/docker-compose
-chmod +x /root/bin/docker-compose
-echo 'export PATH=/root/bin:${PATH}' >> /root/.bashrc
+mkdir -p /usr/local/bin
+wget https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -O /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
-# Clone the GitHub repository
-cd /root
-git clone https://github.com/JoshuaPhillips64/airflow-spark-architecture-aws.git
+# Update PATH for all users
+echo 'export PATH=/usr/local/bin:${PATH}' > /etc/profile.d/docker-compose.sh
+
+# Install Poetry
+echo "Installing Poetry..."
+curl -sSL https://install.python-poetry.org | python3 -
+
+# Ensure Poetry is available globally
+ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+
