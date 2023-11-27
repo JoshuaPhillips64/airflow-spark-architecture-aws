@@ -7,7 +7,7 @@ ENV AIRFLOW_HOME=/opt/airflow
 USER root
 # Update and upgrade the system packages, and install system dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git curl && \
+    apt-get install -y --no-install-recommends git curl unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
