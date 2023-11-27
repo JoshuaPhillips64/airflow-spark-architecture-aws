@@ -50,8 +50,7 @@ x-airflow-common:
     AIRFLOW__CORE__FERNET_KEY: 'o_o87QWxlKpR7iUH3Ffmqv9XZ-oSUawWOE6QvycQ0vM='
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-    AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-dbt-postgres==1.7.2}
+    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
     # Uncomment and set these if not using EC2 IAM roles
     # AWS_ACCESS_KEY_ID: '<your-access-key>'
     # AWS_SECRET_ACCESS_KEY: '<your-secret-key>'
