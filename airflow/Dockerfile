@@ -6,10 +6,10 @@ ENV AIRFLOW_HOME=/opt/airflow
 
 USER $AIRFLOW_UID
 # Update and upgrade the system packages, and install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends git curl unzip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get update && \
+    sudo apt-get install -y --no-install-recommends git curl unzip && \
+    sudo apt-get clean && \
+    sudo rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
 # git gcc g++ -qqq
