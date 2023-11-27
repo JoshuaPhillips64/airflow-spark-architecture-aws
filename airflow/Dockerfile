@@ -16,7 +16,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN set -x && curl -sSL https://install.python-poetry.org | python3 -
 
 # Copy only your pyproject.toml file into the image
 # This file should define your Python dependencies
@@ -31,7 +31,7 @@ RUN poetry config virtualenvs.create false
 
 # Install dependencies using Poetry
 # This will also create the poetry.lock file
-RUN poetry install --no-dev
+RUN set -x && poetry install --no-dev
 
 # Ref: https://airflow.apache.org/docs/docker-stack/recipes.html
 SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
