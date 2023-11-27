@@ -11,6 +11,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install AWS CLI for AWS operations within Airflow
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && aws --version
+
 USER $AIRFLOW_UID
 RUN pip install --upgrade pip
 # git gcc g++ -qqq
@@ -21,12 +27,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Ref: https://airflow.apache.org/docs/docker-stack/recipes.html
 
 SHELL ["/bin/bash", "-o", "pipefail", "-e", "-u", "-x", "-c"]
-
-# Install AWS CLI for AWS operations within Airflow
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && ./aws/install \
-    && aws --version
 
 WORKDIR $AIRFLOW_HOME
 
