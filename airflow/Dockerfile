@@ -9,7 +9,7 @@ USER root
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git curl && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* \
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
 # git gcc g++ -qqq
