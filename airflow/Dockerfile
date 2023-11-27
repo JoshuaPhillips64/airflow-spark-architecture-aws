@@ -1,6 +1,6 @@
 # First-time build can take upto 10 mins.
 
-FROM apache/airflow:2.2.3-python3.8
+FROM apache/airflow:latest-python3.11
 
 ENV AIRFLOW_HOME=/opt/airflow
 

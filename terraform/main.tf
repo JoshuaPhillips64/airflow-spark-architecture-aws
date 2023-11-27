@@ -134,7 +134,7 @@ resource "aws_instance" "airflow" {
 
   # If you want to modify the root volume size instead, uncomment the following:
   root_block_device {
-     volume_size = 50  # New size of the root volume in GB
+     volume_size = 100  # New size of the root volume in GB
    }
 }
 

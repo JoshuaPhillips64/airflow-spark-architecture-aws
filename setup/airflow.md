@@ -17,6 +17,7 @@ On Local machine - .pem file should be saved to folder where you are running loc
 
 Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below. 
 Should read "VM Setup Complete". If it says anything else - its still running. Should take about 10 minutes.
+Once you see its complete, you should reconnect and proceed with the rest of the steps.
     
   ```bash
   sudo tail /var/log/cloud-init-output.log
