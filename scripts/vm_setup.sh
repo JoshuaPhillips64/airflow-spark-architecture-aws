@@ -20,7 +20,8 @@ yum install -y git docker
 
 # Starting and configuring Docker
 service docker start
-groupadd docker
+# Add the Docker group and add ec2-user to it
+groupadd docker || true  # Ignores the error if the group already exists
 usermod -aG docker ec2-user
 
 # Installing Docker Compose
