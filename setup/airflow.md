@@ -2,7 +2,7 @@
 
 ![airflow](../images/airflow.jpg)
 
-We will setup airflow on docker in a dedicated compute instance. dbt is setup inside airflow.
+After running the terraform apply. We will setup airflow on docker in a dedicated compute instance. dbt is setup inside airflow.
 
 - Establish SSH connection or connect through AWS console 
 
@@ -15,7 +15,7 @@ On Local machine - .pem file should be saved to folder where you are running loc
   ssh -i "streaming-architecture-key-pair.pem" ec2-user@<OUTPUT FROM TERRAFORM>
   ```
 
-Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below
+Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below. Should read "VM Setup Complete"
     
   ```bash
   sudo cat /var/log/cloud-init-output.log
@@ -30,7 +30,7 @@ After it has completed - Clone git repo
 - Start Airflow. (This shall take a few good minutes, grab a coffee!)
 
   ```bash
-  bash ~/airflow-spark-streaming-aws/scripts/airflow_startup.sh && cd ~/airflow-spark-streaming-aws/airflow
+  bash ~/airflow-spark-architecture-aws/scripts/airflow_startup.sh && cd ~/airflow-spark-architecture-aws/airflow
   ```
 
 - Airflow should be available on port `8080` a couple of minutes after the above setup is complete. Login with default username & password as **airflow**.

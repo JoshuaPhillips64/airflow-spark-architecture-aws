@@ -38,3 +38,5 @@ curl -sSL https://install.python-poetry.org | python3 -
 # Ensure Poetry is available globally
 ln -s /root/.local/bin/poetry /usr/local/bin/poetry
 
+echo "VM setup complete!"
+
