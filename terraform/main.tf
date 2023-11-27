@@ -115,9 +115,11 @@ resource "aws_network_acl_association" "public_nacl_association" {
 }
 
 # EC2 Instance for Airflow
+#Current cost at t3.large is $0.0832 per Hour
+#using ubuntu 20.04
 resource "aws_instance" "airflow" {
-  ami                         = data.aws_ami.latest_amazon_linux.id
-  instance_type               = "t2.micro"
+  ami                         = data.aws_ami.latest_ubuntu.id
+  instance_type               = "t3.2xlarge"
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.all_ec2_sg.id]
   associate_public_ip_address = true
@@ -138,8 +140,8 @@ output "airflow_public_ip" {
 
 # EC2 Instance for Spark
 resource "aws_instance" "spark" {
-  ami           = data.aws_ami.latest_amazon_linux.id
-  instance_type = "t2.nano"
+  ami           = data.aws_ami.latest_ubuntu.id
+  instance_type = "t3.nano"
   subnet_id     = module.vpc.public_subnets[0]
   security_groups = [aws_security_group.all_ec2_sg.id]
   associate_public_ip_address = true  # Ensure public IP is assigned
@@ -153,13 +155,13 @@ resource "aws_instance" "spark" {
   }
 }
 
-# Dynamically Fetching the Latest Amazon Linux AMI
-data "aws_ami" "latest_amazon_linux" {
+# Dynamically Fetching the Latest ubuntu AMI
+data "aws_ami" "latest_ubuntu" {
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-*-20.04-amd64-server-*"]  # Adjust this pattern for different Ubuntu versions if needed
   }
 
   filter {
@@ -167,7 +169,7 @@ data "aws_ami" "latest_amazon_linux" {
     values = ["hvm"]
   }
 
-  owners = ["amazon"]
+  owners = ["099720109477"]  # Canonical's owner ID
 }
 
 # S3 Bucket for Data Storage

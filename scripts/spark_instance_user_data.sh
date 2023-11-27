@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Update System
-sudo yum update -y
+sudo apt-get update -y
 
 # Install Java
-sudo yum install -y java-1.8.0-openjdk
+sudo apt-get install -y openjdk-8-jdk
 
 # Download and Install Spark
 wget https://archive.apache.org/dist/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz
@@ -15,10 +15,17 @@ sudo mv spark-3.2.1-bin-hadoop3.2 /opt/spark
 export SPARK_HOME=/opt/spark
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
+# Add Environment Variables to bashrc
+echo 'export SPARK_HOME=/opt/spark' >> ~/.bashrc
+echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> ~/.bashrc
+
 # Install Python3 and Set PySpark Python
-sudo yum install -y python3
+sudo apt-get install -y python3
 
 export PYSPARK_PYTHON=/usr/bin/python3
+
+# Add PySpark Python to bashrc
+echo 'export PYSPARK_PYTHON=/usr/bin/python3' >> ~/.bashrc
 
 # Source bashrc
 source ~/.bashrc
@@ -34,9 +41,9 @@ echo 'spark.eventLog.dir file:/tmp/spark-events' >> $SPARK_HOME/conf/spark-defau
 echo 'spark.history.fs.logDirectory file:/tmp/spark-events' >> $SPARK_HOME/conf/spark-defaults.conf
 
 # Install and Configure SSH
-sudo yum install -y openssh-server openssh-clients
-sudo systemctl enable sshd
-sudo systemctl start sshd
+sudo apt-get install -y openssh-server openssh-client
+sudo systemctl enable ssh
+sudo systemctl start ssh
 
 # Start Spark History Server (Uncomment if required)
 # $SPARK_HOME/sbin/start-history-server.sh

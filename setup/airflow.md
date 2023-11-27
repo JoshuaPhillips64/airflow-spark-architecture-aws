@@ -12,7 +12,7 @@ After running the terraform apply. We will setup airflow on docker in a dedicate
 
 On Local machine - .pem file should be saved to folder where you are running local terminal
   ```bash
-  ssh -i "streaming-architecture-key-pair.pem" ec2-user@<OUTPUT FROM TERRAFORM>
+  ssh -i "streaming-architecture-key-pair.pem" ubuntu@<OUTPUT FROM TERRAFORM>
   ```
 
 Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below. 
