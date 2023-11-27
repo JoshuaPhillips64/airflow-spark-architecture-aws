@@ -1,6 +1,6 @@
 apache-airflow-providers-amazon==8.11.0
 pyarrow
-pandas == 2.0
+pandas
 sqlalchemy==1.4.50
-psycopg2-binary==2.9.9
+psycopg2-binary
 dbt-postgres==1.7.2
