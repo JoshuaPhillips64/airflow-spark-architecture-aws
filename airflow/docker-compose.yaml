@@ -46,7 +46,6 @@ x-airflow-common:
     dockerfile: ./Dockerfile
   environment:
     &airflow-common-env
-    AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__CORE__FERNET_KEY: 'o_o87QWxlKpR7iUH3Ffmqv9XZ-oSUawWOE6QvycQ0vM='
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
