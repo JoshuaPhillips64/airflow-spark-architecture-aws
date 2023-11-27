@@ -1,20 +1,10 @@
 #!/bin/bash
 
 # Install Python 3.9.6
-echo "Installing Python 3.9.6..."
-yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel -y
-wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
-tar xzf Python-3.9.6.tgz
-cd Python-3.9.6
-./configure --enable-optimizations
-make altinstall
-cd ..
-ln -s /usr/local/bin/python3.9 /usr/bin/python3.9
-
-# Set Python 3.9 as the default python version
-echo "Setting Python 3.9 as the default version..."
-update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
-update-alternatives --set python /usr/bin/python3.9
+echo "Installing Python 3.9.6 and git and docker..."
+# Updating and installing packages
+yum update -y
+yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel git docker -y
 
 # Downloading and installing Anaconda
 echo "Downloading Anaconda..."
@@ -29,10 +19,6 @@ source /root/.bashrc
 /root/anaconda/bin/conda update -y conda
 echo "Installed Conda version:"
 /root/anaconda/bin/conda --version
-
-# Updating and installing packages
-yum update -y
-yum install -y git docker
 
 # Starting and configuring Docker
 service docker start
@@ -54,6 +40,20 @@ curl -sSL https://install.python-poetry.org | python3 -
 
 # Ensure Poetry is available globally
 ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+
+# Downloading and installing Python 3.9.6
+wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
+tar xzf Python-3.9.6.tgz
+cd Python-3.9.6
+./configure --enable-optimizations
+make altinstall
+cd ..
+ln -s /usr/local/bin/python3.9 /usr/bin/python3.9
+
+# Set Python 3.9 as the default python version
+echo "Setting Python 3.9 as the default version..."
+update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
+update-alternatives --set python /usr/bin/python3.9
 
 echo "VM setup complete!"
 

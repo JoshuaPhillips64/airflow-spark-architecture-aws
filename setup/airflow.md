@@ -15,10 +15,11 @@ On Local machine - .pem file should be saved to folder where you are running loc
   ssh -i "streaming-architecture-key-pair.pem" ec2-user@<OUTPUT FROM TERRAFORM>
   ```
 
-Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below. Should read "VM Setup Complete"
+Once you connect, need to make sure the user-data script "vm_setup.sh" completes. You can check that with below. 
+Should read "VM Setup Complete". If it says anything else - its still running. Should take about 10 minutes.
     
   ```bash
-  sudo cat /var/log/cloud-init-output.log
+  sudo tail /var/log/cloud-init-output.log
   ```
 
 After it has completed - Clone git repo
