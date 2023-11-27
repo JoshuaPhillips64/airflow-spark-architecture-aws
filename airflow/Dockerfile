@@ -17,6 +17,8 @@ RUN apt-get update && \
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
+RUN cat /opt/airflow/poetry-installer-error-uk420_wn.log
+
 # Copy only your pyproject.toml file into the image
 # This file should define your Python dependencies
 COPY pyproject.toml $AIRFLOW_HOME/
