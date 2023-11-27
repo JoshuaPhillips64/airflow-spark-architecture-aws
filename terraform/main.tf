@@ -119,7 +119,7 @@ resource "aws_network_acl_association" "public_nacl_association" {
 #using ubuntu 20.04
 resource "aws_instance" "airflow" {
   ami                         = data.aws_ami.latest_ubuntu.id
-  instance_type               = "t3.2xlarge"
+  instance_type               = "t3.large"
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.all_ec2_sg.id]
   associate_public_ip_address = true
@@ -131,6 +131,11 @@ resource "aws_instance" "airflow" {
   }
 
   user_data = file("${path.module}/../scripts/vm_setup.sh")
+
+  # If you want to modify the root volume size instead, uncomment the following:
+  root_block_device {
+     volume_size = 50  # New size of the root volume in GB
+   }
 }
 
 output "airflow_public_ip" {

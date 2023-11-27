@@ -9,10 +9,10 @@ ENV AIRFLOW_HOME=/opt/airflow
 # Run as root to install packages and manage system settings
 USER root
 
-# Update and upgrade the system packages, and install system dependencies
 RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y git curl
+    apt-get install -y --no-install-recommends git curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
