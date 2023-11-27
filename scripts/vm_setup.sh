@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# Install Python 3.9.6
+echo "Installing Python 3.9.6..."
+yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel -y
+wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
+tar xzf Python-3.9.6.tgz
+cd Python-3.9.6
+./configure --enable-optimizations
+make altinstall
+cd ..
+ln -s /usr/local/bin/python3.9 /usr/bin/python3.9
+
+# Set Python 3.9 as the default python version
+echo "Setting Python 3.9 as the default version..."
+update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
+update-alternatives --set python /usr/bin/python3.9
+
 # Downloading and installing Anaconda
 echo "Downloading Anaconda..."
 wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh -O /root/Anaconda3-2021.11-Linux-x86_64.sh
